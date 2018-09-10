@@ -120,7 +120,7 @@ sub _process_module {
                 for my $eg (@eg) {
                     push @pod, " # $eg->{summary}\n" if defined $eg->{summary};
 
-                    push @pod, " ", dmp($eg->{str}), " =~ re(", dmp("$rp_package\::$patname"), "); ";
+                    push @pod, " ", dmp($eg->{str}), " =~ re(", dmp("$rp_package\::$patname"), ($eg->{gen_args} ? ", ".dmp($eg->{gen_args}) : ""), "); ";
                     if (ref $eg->{matches} eq 'ARRAY') {
                         if (@{ $eg->{matches} }) {
                             push @pod, "# matches, ",
