@@ -1,13 +1,13 @@
-0.003   2018-09-10 (PERLANCAR)
+0.003   2018-09-10  Released-By: PERLANCAR
 
 	- [bugfix] Show gen_args in examples for dynamic pattern.
 
 
-0.002   2018-09-10 (PERLANCAR)
+0.002   2018-09-10  Released-By: PERLANCAR
 
 	- Render examples as POD (Regexp::Pattern 0.2.4).
 
 
-0.001   2016-09-13 (PERLANCAR)
+0.001   2016-09-13  Released-By: PERLANCAR
 
         - First release.
