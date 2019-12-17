@@ -86,7 +86,10 @@ sub _process_module {
         for my $patname (@patnames) {
             my $patspec = $var->{$patname};
             push @pod, "=item * $patname\n\n";
-            push @pod, $patspec->{summary}, ".\n\n" if $patspec->{summary};
+            if (defined $patspec->{summary}) {
+                require String::PodQuote;
+                push @pod, String::PodQuote::pod_quote($patspec->{summary}), ".\n\n";
+            }
             push @pod, $self->_md2pod($patspec->{description})
                 if $patspec->{description};
 
@@ -98,7 +101,10 @@ sub _process_module {
                     for my $argname (sort keys %{ $patspec->{gen_args} }) { # XXX sort by position, then name
                         my $argspec = $patspec->{gen_args}{$argname};
                         push @pod, "=item * $argname\n\n";
-                        push @pod, $argspec->{summary}, ".\n\n" if $argspec->{summary};
+                        if (defined $argspec->{summary}) {
+                            require String::PodQuote;
+                            push @pod, String::PodQuote::pod_quote($argspec->{summary}), ".\n\n";
+                        }
                         push @pod, $self->_md2pod($argspec->{description})
                             if $argspec->{description};
                     }
@@ -118,7 +124,10 @@ sub _process_module {
                 last unless @eg;
                 push @pod, "Examples:\n\n";
                 for my $eg (@eg) {
-                    push @pod, " # $eg->{summary}\n" if defined $eg->{summary};
+                    if (defined $eg->{summary}) {
+                        require String::PodQuote;
+                        push @pod, String::PodQuote::pod_quote($eg->{summary}), ".\n\n";
+                    }
 
                     push @pod, " ", dmp($eg->{str}), " =~ re(", dmp("$rp_package\::$patname"), ($eg->{gen_args} ? ", ".dmp($eg->{gen_args}) : ""), "); ";
                     if (ref $eg->{matches} eq 'ARRAY') {
