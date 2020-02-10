@@ -168,6 +168,17 @@ sub _process_module {
             });
     }
 
+    # mention some modules in See Also section
+    {
+        my @pod = (
+            "L<Regexp::Pattern>\n\n",
+            "Some utilities related to Regexp::Pattern: L<App::RegexpPatternUtils>, L<rpgrep> from L<App::rpgrep>.\n\n",
+        );
+        $self->add_text_to_section(
+            $document, join('', @pod), 'SEE ALSO',
+        );
+    }
+
     $self->log(["Generated POD for '%s'", $filename]);
 }
 
@@ -214,6 +225,8 @@ Currently it does the following:
 =item * Add a description about Regexp::Pattern in the Description section
 
 =item * Add a Patterns section containing list of patterns contained in the module
+
+=item * Mention some modules in the See Also section, including Regexp::Pattern
 
 =back
 
